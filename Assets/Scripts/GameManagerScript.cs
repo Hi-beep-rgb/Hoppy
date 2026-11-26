@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class GameManagerScript : MonoBehaviour
@@ -90,8 +91,41 @@ public class GameManagerScript : MonoBehaviour
         {
             Vector2Int moveDirection = Vector2Int.zero;
 
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                //Converts the screen coordiantes to Unitys world coordinates
+                Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+                /*if (touchPos.y > 0)
+                {
+                    //Moves character forwards
+                    character.localRotation = Quaternion.identity;
+                    moveDirection.y = 1;
+                }
+                else if(touchPos.y < 0)
+                {
+                    //Moves character back
+                    character.localRotation = Quaternion.Euler(0, 180, 0);
+                    moveDirection.y = -1;
+                }
+                else if (touchPos.x < 0)
+                {
+                    //Moves character left
+                    character.localRotation = Quaternion.Euler(0, -90, 0);
+                    moveDirection.x = -1;
+                }
+                else if( touchPos.x > 0)
+                {
+                    //Moves character right
+                    character.localRotation = Quaternion.Euler(0, 90, 0);
+                    moveDirection.x = 1;
+                }*/
+            }
+
             //Single if/else don't want to move disgonally
-            if(Keyboard.current.upArrowKey.wasPressedThisFrame)
+            /*if (Keyboard.current.upArrowKey.wasPressedThisFrame)
             {
                 //Moves character forwards
                 character.localRotation = Quaternion.identity;
@@ -114,7 +148,7 @@ public class GameManagerScript : MonoBehaviour
                 //Moves character right
                 character.localRotation = Quaternion.Euler(0, 90, 0);
                 moveDirection.x = 1;
-            }
+            }*/
 
             //Users movement code
             if(moveDirection != Vector2Int.zero)
@@ -132,5 +166,41 @@ public class GameManagerScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void MoveForward()
+    {
+        Vector2Int moveDirection = Vector2Int.zero;
+
+        //Moves character forwards
+        character.localRotation = Quaternion.identity;
+        moveDirection.y = 1;
+    }
+
+    public void MoveDown()
+    {
+        Vector2Int moveDirection = Vector2Int.zero;
+
+        //Moves character back
+        character.localRotation = Quaternion.Euler(0, 180, 0);
+        moveDirection.y = -1;
+    }
+
+    public void MoveLeft()
+    {
+        Vector2Int moveDirection = Vector2Int.zero;
+
+        //Moves character left
+        character.localRotation = Quaternion.Euler(0, -90, 0);
+        moveDirection.x = -1;
+    }
+
+    public void MoveRight()
+    {
+        Vector2Int moveDirection = Vector2Int.zero;
+
+        //Moves character right
+        character.localRotation = Quaternion.Euler(0, 90, 0);
+        moveDirection.x = 1;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TouchscreenScript : MonoBehaviour
+public class TouchControls : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,9 +15,12 @@ public class TouchscreenScript : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if(touch.phase == TouchPhase.Began )
+            //Converts the screen coordiantes to Unitys world coordinates
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if(touchPos.x > 0)
             {
-                this.transform.position = Camera.main.ScreenToViewportPoint(new Vector3(touch.position.x , touch.position.y, 5));
+
             }
         }
     }
