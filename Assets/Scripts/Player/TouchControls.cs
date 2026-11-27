@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TouchControls : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class TouchControls : MonoBehaviour
 
             if(touchPos.x > 0)
             {
-
+                Debug.Log("Touch works");
             }
         }
     }
